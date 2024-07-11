@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moeda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .converter {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .converter h1 {
+            margin-bottom: 20px;
+        }
+
+        .converter input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .converter button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .converter button:hover {
+            background-color: #218838;
+        }
+
+        #resultBRL, #resultMZN {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h1>Conversor de Moeda</h1>
+        <div>
+            <label for="amountBRL">Valor em Real (BRL):</label>
+            <input type="number" id="amountBRL" placeholder="Digite o valor">
+            <button onclick="convertBRLtoMZN()">Converter para Metical (MZN)</button>
+            <div id="resultBRL"></div>
+        </div>
+        <div>
+            <label for="amountMZN">Valor em Metical (MZN):</label>
+            <input type="number" id="amountMZN" placeholder="Digite o valor">
+            <button onclick="convertMZNtoBRL()">Converter para Real (BRL)</button>
+            <div id="resultMZN"></div>
+        </div>
+    </div>
+    <script>
+        function convertBRLtoMZN() {
+            const amountBRL = document.getElementById("amountBRL").value;
+            const pastExchangeRateBRLMZN = 11.69; // Taxa de câmbio BRL para MZN no passado
+            const pastExchangeRateUSDBRL = 5.45; // Taxa de câmbio USD para BRL no passado
+            const currentExchangeRateUSDBRL = 5.44; // Taxa de câmbio USD para BRL hoje
+            
+            // Nova taxa de câmbio BRL para MZN
+            const newExchangeRateBRLMZN = pastExchangeRateBRLMZN * (currentExchangeRateUSDBRL / pastExchangeRateUSDBRL);
+            
+            // Converte o valor inserido
+            const convertedAmountMZN = amountBRL * newExchangeRateBRLMZN;
+            
+            document.getElementById("resultBRL").innerHTML = 
+                `O valor de ${amountBRL} BRL é equivalente a ${convertedAmountMZN.toFixed(2)} MZN com a taxa de câmbio personalizada.`;
+        }
+
+        function convertMZNtoBRL() {
+            const amountMZN = document.getElementById("amountMZN").value;
+            const pastExchangeRateBRLMZN = 11.69; // Taxa de câmbio BRL para MZN no passado
+            const pastExchangeRateUSDBRL = 5.45; // Taxa de câmbio USD para BRL no passado
+            const currentExchangeRateUSDBRL = 5.44; // Taxa de câmbio USD para BRL hoje
+            
+            // Nova taxa de câmbio BRL para MZN
+            const newExchangeRateBRLMZN = pastExchangeRateBRLMZN * (currentExchangeRateUSDBRL / pastExchangeRateUSDBRL);
+            
+            // Converte o valor inserido
+            const convertedAmountBRL = amountMZN / newExchangeRateBRLMZN;
+            
+            document.getElementById("resultMZN").innerHTML = 
+                `O valor de ${amountMZN} MZN é equivalente a ${convertedAmountBRL.toFixed(2)} BRL com a taxa de câmbio personalizada.`;
+        }
+    </script>
+</body>
+</html>
